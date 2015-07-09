@@ -214,7 +214,7 @@ the key used for encryption and so on.
 
 You can suppress that info with the `--quiet` option, which is actually
 super handy! Say you need to log in to something from the command line and
-it can take a passwords on `stdin`. You could do:
+it can take a password on `stdin`. You could do:
 
     echo 'mysecurepassword' | gpg --encrypt --output mypassword.gpg
     gpg --decrypt --quiet mypassword.gpg | myterminalutility
