@@ -196,7 +196,7 @@ can also pass in data to `stdin`:
 `echo 'super secret info' | gpg --encrypt --output encrypted.gpg`
 
 You can also encrypt documents that you'll exchange with someone over
-channels other than email, provided that you have their private key. You
+channels other than email, provided that you have their public key. You
 just need to specify the correct recipient when you're encrypting.
 
 Alternative if you do all your emailing from the command line this is
