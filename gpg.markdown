@@ -1,11 +1,15 @@
-#GPG related things
+#GPG: key management from the command line
 
-First off:
-    - what is a public/private keypair?
-    - where do they live?
-        - keyservers
-        - hkp/hkps
-        - [pool keyserver](pool.sks-keyservers.net)
+This is a guide to key management for [GPG](https://gnupg.org/) on the
+command line. By no means is this the only way to do it! There's a user
+friendly plugin called [Enigmail](https://enigmail.net/home/index.php) for
+the free [Thunderbird](https://www.mozilla.org/en-US/thunderbird/) email
+client (as well as other clients like Apple Mail) which simplifies a lot
+of this key management.
+
+However, understanding the command line aspect of key management can make
+some confusing aspects of the whole process more clear (I think!). Anyway,
+let's dive in!
 
 ##Make a key
 
@@ -20,7 +24,10 @@ check out this guide:
 
 [Debian guide](http://keyring.debian.org/creating-key.html)
 
-If not we'll use the wizard in Thunderbird/Enigmail!
+If not we'll use the wizard in Thunderbird/Enigmail! There's a guide to
+doing so from the [FSF here](https://emailselfdefense.fsf.org/en/) and
+from the [EFF here](https://ssd.eff.org/en) (look under 'how to use GPG
+for Linux/Windows/Mac OS).
 
 ##Import a key
 
@@ -39,7 +46,10 @@ edit shell. Type `trust`, and then hit `4`, and then type `save`.
 
 My understanding is that although there are different trust levels its
 actually a binary state (either it will let you send mail to that public
-key or no).
+key or no). 
+
+Dealing with 'trust' is one of the things that the Enigmail plugin
+automates for us.
 
 ##Fetch keys
 
@@ -50,6 +60,31 @@ We can also fetch keys from the intarwebs usings gpg:
 (e.g. after finding someones public key on a keyserver). It's always
 a good idea to verify the fingerprint after doing this!
 
+###What is a keyserver, anyhow?
+
+A keyserver is a webserver that holds public keys. As I understand it
+there are a network of them, and they exchange information/updates so that
+each keyserver has a copy of the whole PGP key history (sort of like the
+bitcoin blockchain?). 
+
+The idea is that an individual server can go down and the info will still
+be available. The keyservers are a crucial component of making GPG work,
+they are what enable the web of trust and enable easy exchange of keys.
+
+The address (pool.sks-keyservers.net) is generally what you should default
+to using. It lets you use one address to connect to the whole pool of
+keyservers, so you don't need to worry about a particular one being down. 
+
+Sometimes that address seems not to work, however, and in that case
+I generally fall back to (pgp.mit.edu). 
+
+You can set a default keyserver in `~/.gnupg/gpg.conf` like this:
+
+    keyserver hkp://pool.sks-keyservers.net
+
+If you use most modern linux distros you can probably substitute `hkps`
+for `hkp`, which is anologous to http/https.
+
 ##Export a key to a file
 
 We can export a key to a local file:
@@ -57,8 +92,9 @@ We can export a key to a local file:
 `gpg --export -a 'key id' > mykey.asc`
 
 The `-a` option is the same as `--armor`, it puts the key in 'ASCII armor'
-that the gpg tool will recognize and import. This is handy if you want to
-sneakernet or email your public key directly to someone.
+that the gpg tool will recognize and import (in the same manner that we
+did above). This is handy if you want to sneakernet or email your public
+key directly to someone.
 
 ##List keys
 
@@ -141,4 +177,37 @@ It will ask you to confirm and enter your private key password.
 
 ##Encrypting files!
 
-Ok, so all that is out of the way. How do we encrypt a file?
+Ok, so all that is out of the way. How do we encrypt a file? Well, if
+you're using an email client like Thunderbird it should basically handle
+that for you.
+
+If your use case is different (e.g. you're encrypting a super secret file
+on your own computer) you can do:
+
+`gpg --encrypt myfile`
+
+Then you'll get prompted to fill in the recipient - if it's just for your
+own use this will be you. This will write a file called `myfile.gpg`. You
+can also pass in data to `stdin`:
+
+`echo 'super secret info' | gpg --encrypt --output encrypted.gpg`
+
+##Decrypting files!
+
+This is pretty straightforward!
+
+`gpg --decrypt myfile.gpg`
+
+That works pretty much how you think it will, it prints the decrypted
+contents of the file to `stdout`, along with a little bit of info about
+the key used for encryption and so on.
+
+You can suppress that info with the `--quiet` option, which is actually
+super handy! Say you need to log in to something from the command line and
+it can take a passwords on `stdin`. You could do:
+
+    echo 'mysecurepassword' | gpg --encrypt --output mypassword.gpg
+    gpg --decrypt --quiet mypassword.gpg | myterminalutility
+
+Whoa cool! This is actually what I use to store the passwords for my mail
+accounts on my machine, it works pretty smoothly.
