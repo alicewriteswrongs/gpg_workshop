@@ -126,3 +126,7 @@ If we want to sign a key we can do:
 `gpg --sign-key 'key id'`
 
 It will ask you to confirm and enter your private key password.
+
+##Encrypting files!
+
+Ok, so all that is out of the way. How do we encrypt a file?
