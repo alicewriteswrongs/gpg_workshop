@@ -28,6 +28,19 @@ At the command line do:
 
 `gpg --import-key /path/to/someoneskey.asc`
 
+GPG implements 'trust' for the public keys stored locally on your machine.
+The program will not allow you to encrypt a message to a public key which
+you haven't marked as 'trusted' (yes this is tedious). To 'trust' a key:
+
+`gpg --edit 'keyid'`
+
+where 'keyid' is the key you want to 'trust'. This opens the interactive
+edit shell. Type `trust`, and then hit `4`, and then type `save`.
+
+My understanding is that although there are different trust levels its
+actually a binary state (either it will let you send mail to that public
+key or no).
+
 ##Fetch keys
 
 We can also fetch keys from the intarwebs usings gpg:
@@ -36,7 +49,6 @@ We can also fetch keys from the intarwebs usings gpg:
 
 (e.g. after finding someones public key on a keyserver). It's always
 a good idea to verify the fingerprint after doing this!
-
 
 ##Export a key to a file
 
