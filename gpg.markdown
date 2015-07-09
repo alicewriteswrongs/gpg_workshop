@@ -53,7 +53,7 @@ automates for us.
 
 ##Fetch keys
 
-We can also fetch keys from the intarwebs usings gpg:
+We can also fetch keys from the intarwebs using GPG:
 
 `gpg --fetch-keys 'url'`
 
@@ -62,7 +62,7 @@ a good idea to verify the fingerprint after doing this!
 
 ###What is a keyserver, anyhow?
 
-A keyserver is a webserver that holds public keys. As I understand it
+A keyserver is a server that holds public keys. As I understand it
 there are a network of them, and they exchange information/updates so that
 each keyserver has a copy of the whole PGP key history (sort of like the
 bitcoin blockchain?). 
@@ -83,8 +83,8 @@ You can set a default keyserver in `~/.gnupg/gpg.conf` like this:
 
     keyserver hkp://pool.sks-keyservers.net
 
-If you use most modern linux distros you can probably substitute `hkps`
-for `hkp`, which is anologous to http/https.
+If you use most Linux distros you can probably substitute `hkps`
+for `hkp`, which is analogous to http/https.
 
 ##Export a key to a file
 
@@ -93,7 +93,7 @@ We can export a key to a local file:
 `gpg --export -a 'key id' > mykey.asc`
 
 The `-a` option is the same as `--armor`, it puts the key in 'ASCII armor'
-that the gpg tool will recognize and import (in the same manner that we
+that the GPG tool will recognize and import (in the same manner that we
 did above). This is handy if you want to sneakernet or email your public
 key directly to someone.
 
@@ -146,8 +146,9 @@ This will upload a public key to the keyserver.
 
 Why do we have to specify a particular key? Don't we want to send all our
 signatures up? Well, not really. Uploading all your signatures opens you
-up to social network analysis, and for this reason gpg defaults to keeping
-signatures on the local machine (or, uploading sigs to the WOT is opt-in).
+up to social network analysis, and for this reason GPG defaults to keeping
+signatures on the local machine (or, uploading signatures to the WOT is
+opt-in).
 
 ##Search for a key
 
@@ -178,7 +179,7 @@ It will ask you to confirm and enter your private key password.
 
 ##Encrypting files!
 
-Ok, so all that is out of the way. How do we encrypt a file? Well, if
+OK, so all that is out of the way. How do we encrypt a file? Well, if
 you're using an email client like Thunderbird it should basically handle
 that for you.
 
