@@ -165,7 +165,7 @@ once you have found someone's key you can `gpg --fetch-keys 'url'`.
 So that WOT thing, how does it work? Well, basically the idea is that we
 sign other folks public keys when we've verified that the key is not under
 the control of an attacker/malicious agent. Then the idea is that we have
-some degrees of separation based web of trust, where if I trust say Bob's
+some degree of separation based web of trust, where if I trust, say, Bob's
 key, and I see that he has signed Carol's key, I can trust to a certain
 extent that Carol is a real person. That's the idea, anyway. In practice,
 key verification is tedious and time consuming, and relies on humans'
@@ -181,10 +181,11 @@ It will ask you to confirm and enter your private key password.
 
 OK, so all that is out of the way. How do we encrypt a file? Well, if
 you're using an email client like Thunderbird it should basically handle
-that for you.
+that for you, for encrypting email.
 
-If your use case is different (e.g. you're encrypting a super secret file
-on your own computer) you can do:
+But GPG can do a lot more than just email! If your use case is different
+(e.g. you're encrypting a super secret file on your own computer) you can
+do:
 
 `gpg --encrypt myfile`
 
@@ -193,6 +194,13 @@ own use this will be you. This will write a file called `myfile.gpg`. You
 can also pass in data to `stdin`:
 
 `echo 'super secret info' | gpg --encrypt --output encrypted.gpg`
+
+You can also encrypt documents that you'll exchange with someone over
+channels other than email, provided that you have their private key. You
+just need to specify the correct recipient when you're encrypting.
+
+Alternative if you do all your emailing from the command line this is
+probably how you encrypt email too? 
 
 ##Decrypting files!
 
