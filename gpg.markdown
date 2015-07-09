@@ -71,13 +71,13 @@ The idea is that an individual server can go down and the info will still
 be available. The keyservers are a crucial component of making GPG work,
 they are what enable the web of trust and enable easy exchange of keys.
 
-The address [](pool.sks-keyservers.net) is generally what you should
-default to using. It lets you use one address to connect to the whole pool
-of keyservers, so you don't need to worry about a particular one being
-down. 
+The address [pool.sks-keyservers.net](pool.sks-keyservers.net) is
+generally what you should default to using. It lets you use one address to
+connect to the whole pool of keyservers, so you don't need to worry about
+a particular one being down. 
 
 Sometimes that address seems not to work, however, and in that case
-I generally fall back to [](pgp.mit.edu). 
+I generally fall back to [pgp.mit.edu](pgp.mit.edu). 
 
 You can set a default keyserver in `~/.gnupg/gpg.conf` like this:
 
