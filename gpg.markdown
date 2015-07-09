@@ -1,4 +1,4 @@
-#GPG: key management from the command line
+#GPG from the command line
 
 This is a guide to key management for [GPG](https://gnupg.org/) on the
 command line. By no means is this the only way to do it! There's a user
