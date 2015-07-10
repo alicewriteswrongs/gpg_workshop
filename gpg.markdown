@@ -29,6 +29,46 @@ doing so from the [FSF here](https://emailselfdefense.fsf.org/en/) and
 from the [EFF here](https://ssd.eff.org/en) (look under 'how to use GPG
 for Linux/Windows/Mac OS').
 
+###Key Revocation
+
+At some point during the Enigmail wizard it should ask you about generating
+a key revocation certificate. This is a *really good idea* and you should do
+it.
+
+How does it work? Well basically we can think of a key as an append only log,
+where we can add information (signatures, new user ids, a photo, etc) but once
+the info has been pushed up to a keyserver we cannot delete it. 
+
+This seems bad: what if I lose my laptop or it's stolen? I can't delete my key?
+Well no, and for good reason: the keyserver would have no way of verifying you
+without your private key. Enter revocation certs: this is a little file which
+can be used to revoke your public key, which essentially means that a flag will
+be appended to the key that says 'hey, don't trust this!' so that folks who try
+to send you a message will be notified. Then when you get your new laptop you
+can generate a new key and happily encrypt away! Nice!
+
+If you store your revocation cert on the same machine as your private key, then
+it's just as vulnerable to the vagaries of laptop life (coffee spills, theft,
+rain, etc) as your private key, and that doesn't really help you. So put it
+somewhere else! I think if you trust your cloud provider that's not a bad spot,
+or on another computer that stays at home, or on flash storage injected into
+your forearm (??!?!?!).
+
+###Expiration date
+
+Key expiration date is another mechanism for key inactivation, which is sort of
+a failsafe. Some bullet points:
+
+- A key's expiration date can always be changed, even after it has passed (this
+  will unexpire the key)
+- A key's expiration date may only be changed if you hold the private key
+- An expired key is considered to be revoked, in the same manner as if
+  a revocation certification had been appended to it.
+
+This gives us some exta security! If we only have the expiration date a year or
+so in the future, it will be less bad (but still bad!) if we lose access to the
+pirvate key AND to the revocation certificate.
+
 ##Import a key
 
 At the command line do:
@@ -176,6 +216,10 @@ If we want to sign a key we can do:
 `gpg --sign-key 'key id'`
 
 It will ask you to confirm and enter your private key password.
+
+##Key expiration
+
+OK, so hopefully 
 
 ##Encrypting files!
 
