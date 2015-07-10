@@ -240,10 +240,6 @@ If we want to sign a key we can do:
 
 It will ask you to confirm and enter your private key password.
 
-##Key expiration
-
-OK, so hopefully 
-
 ##Encrypting files!
 
 OK, so all that is out of the way. How do we encrypt a file? Well, if
