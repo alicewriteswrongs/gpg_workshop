@@ -54,6 +54,9 @@ somewhere else! I think if you trust your cloud provider that's not a bad spot,
 or on another computer that stays at home, or on flash storage injected into
 your forearm (??!?!?!).
 
+If you lose your cert but you still have access to your private key you can
+always generate a new revocation cert (provided you know your key's password).
+
 ###Expiration date
 
 Key expiration date is another mechanism for key inactivation, which is sort of
@@ -67,7 +70,27 @@ a failsafe. Some bullet points:
 
 This gives us some exta security! If we only have the expiration date a year or
 so in the future, it will be less bad (but still bad!) if we lose access to the
-pirvate key AND to the revocation certificate.
+pirvate key AND to the revocation certificate. In the meantime you would
+probably have to explain to folks why there are two keys bearing your identity,
+and there's a (remote) possibility that someone with access to your stolen or
+lost laptop could impersonate you (but only to folks you haven't told to mark
+your old key as untrustworthy).
+
+This brings me to the point: by default Enigmail sets the expiration time to
+something like 2020. This is bad! Change it!
+
+Do
+
+`gpg --edit-key yourkeyid`
+
+and then type `expire`. It will then ask you for an expression like `<n>y`,
+which will set how long it will take the key to expire in years. Like
+I mentioned above, the expiration date can always be extended if you reach that
+date and still control your key. So don't worry about it! Set it for a year or
+so in the future.
+
+After you hit enter in the edit shell you'll be prompted for your key password,
+and then you can type `save` to save your changes.
 
 ##Import a key
 
