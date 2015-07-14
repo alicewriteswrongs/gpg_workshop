@@ -68,9 +68,9 @@ a failsafe. Some bullet points:
 - An expired key is considered to be revoked, in the same manner as if
   a revocation certification had been appended to it.
 
-This gives us some exta security! If we only have the expiration date a year or
-so in the future, it will be less bad (but still bad!) if we lose access to the
-pirvate key AND to the revocation certificate. In the meantime you would
+This gives us some extra security! If we only have the expiration date a year
+or so in the future, it will be less bad (but still bad!) if we lose access to
+the private key AND to the revocation certificate. In the meantime you would
 probably have to explain to folks why there are two keys bearing your identity,
 and there's a (remote) possibility that someone with access to your stolen or
 lost laptop could impersonate you (but only to folks you haven't told to mark
